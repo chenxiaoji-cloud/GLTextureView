@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context="www.zemoso.com.openglwithtexture.activities.MainActivity">
 
-    <www.zemoso.com.openglwithtexture.gl_renderer.GLTextureView
+    <www.zemoso.com.openglwithtexture.custom_views.MyGLTextureView
+        android:id="@+id/texture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

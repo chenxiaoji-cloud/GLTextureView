@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import www.zemoso.com.openglwithtexture.gl_renderer.GLTextureView;
+import static www.zemoso.com.openglwithtexture.gl_renderer.GLTextureRenderer.loadShader;
 
 /**
  * Created by atif on 10/5/17.
@@ -14,38 +14,33 @@ import www.zemoso.com.openglwithtexture.gl_renderer.GLTextureView;
 
 public class GlTriangle {
 
-    private FloatBuffer mVertexBuffer;
+    //3 coordinates for triangle in counterclockwise order
+    public static final int COORDS_PER_VERTEX = 3;
+    public static float triangleCoords[] = {
+            0.0f, 0.622008459f, 0.0f, // top
+            -0.5f, -0.311004243f, 0.0f, // bottom left
+            0.5f, -0.311004243f, 0.0f  // bottom right
+    };
     private final int mProgram;
-    private int mPositionHandle;
-    private int mColorHandle;
-
     private final String vertexShaderCode =
-            "uniform mat4 uMVPMatrix;"+
-            "attribute vec4 vPosition;" +
+            "uniform mat4 uMVPMatrix;" +
+                    "attribute vec4 vPosition;" +
                     "void main() {" +
                     "  gl_Position = uMVPMatrix * vPosition;" +
                     "}";
-
     private final String fragmentShaderCode =
             "precision mediump float;" +
                     "uniform vec4 vColor;" +
                     "void main() {" +
                     "  gl_FragColor = vColor;" +
                     "}";
-
-    //3 coordinates for triangle in counterclockwise order
-    public static final int COORDS_PER_VERTEX = 3;
-    public static float triangleCoords[] = {
-            0.0f,  0.622008459f, 0.0f, // top
-            -0.5f, -0.311004243f, 0.0f, // bottom left
-            0.5f, -0.311004243f, 0.0f  // bottom right
-    };
-
-    // Set color with red, green, blue and alpha (opacity) values
-    public float color[] = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
-
     private final int vertexCount = triangleCoords.length / COORDS_PER_VERTEX;
     private final int vertexStride = COORDS_PER_VERTEX * 4; // 4 bytes per vertex
+    // Set color with red, green, blue and alpha (opacity) values
+    public float color[] = {0.63671875f, 0.76953125f, 0.22265625f, 1.0f};
+    private FloatBuffer mVertexBuffer;
+    private int mPositionHandle;
+    private int mColorHandle;
     private int mMVPMatrixHandle;
 
     public GlTriangle() {
@@ -65,9 +60,9 @@ public class GlTriangle {
         //set the buffer to read the first position
         mVertexBuffer.position(0);
 
-        int vertexShader = GLTextureView.loadShader(GLES20.GL_VERTEX_SHADER,
+        int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER,
                 vertexShaderCode);
-        int fragmentShader = GLTextureView.loadShader(GLES20.GL_FRAGMENT_SHADER,
+        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER,
                 fragmentShaderCode);
 
 

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">OpenGLWithTexture</string>
+    <string name="glTextureViewCaption">GLES rendered into a TextureView</string>
+    <string name="toggleReleaseCallbackOff">Toggle release (now: ST callback)</string>
+    <string name="toggleReleaseCallbackOn">Toggle release (now: renderer)</string>
+
+    <!-- for cameraFilter_spinner; match with CameraCaptureActivity constants -->
+
+    <!-- for scheduledSwapUpdate_spinner; match with UPDATE_PATTERNS -->
+
+    <!-- for scheduledSwapAhead_spinner; match with FRAME_AHEAD -->
+
 </resources>
